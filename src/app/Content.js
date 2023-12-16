@@ -70,7 +70,7 @@ export default function Content() {
         formData.append("image", file);
         try {
             const { data } = await axios.post(
-                "http://localhost:5000/search",
+                `${process.env.NEXT_PUBLIC_HOST}/search`,
                 formData
             );
             setResults(data);
