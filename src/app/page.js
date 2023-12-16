@@ -1,9 +1,16 @@
+import axios from "axios";
 import Content from "./Content";
-export default function Home() {
+
+const getSeries = async () => {
+    const resp = await axios.get(`${process.env.NEXT_PUBLIC_HOST}/series`);
+    return resp.data;
+};
+export default async function Home() {
+    const data = await getSeries();
     return (
         <>
             <main className="w-full min-h-screen p-4 md:w-10/12 mx-auto">
-                <Content />
+                <Content series={data} />
             </main>
             <footer className="w-full h-48 bg-gray-800 p-8 text-white">
                 <h1 className="font-bold text-3xl">KD Scene</h1>

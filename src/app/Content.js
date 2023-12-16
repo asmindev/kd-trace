@@ -6,7 +6,7 @@ import ImageUploader from "./ImageUploader";
 import ImagePreview from "./ImagePreview";
 import Header from "./Header";
 
-export default function Content() {
+export default function Content({ series }) {
     const inputRef = useRef();
     const [image, setImage] = useState(null);
     const [isNoResults, setIsNoResults] = useState(false);
@@ -92,7 +92,7 @@ export default function Content() {
     }, [image]);
     return (
         <div
-            className="relative w-full h-[40vh]"
+            className="relative w-full min-h-[40vh]"
             onDragEnter={() => setIsDragActive(true)}
             onDragLeave={() => setIsDragActive(false)}
             onDragOver={(e) => {
@@ -148,9 +148,30 @@ export default function Content() {
                         <div className="flex w-full md:w-1/2 gap-4 flex-col">
                             {isNoResults && (
                                 <div className="bg-white w-full p-4 border border-gray-300 rounded-xl">
-                                    <p className="text-gray-500">
+                                    <p className="text-gray-700 font-medium">
                                         No results found
                                     </p>
+                                    <p className="text-gray-500 text-sm">
+                                        Please try another image
+                                    </p>
+                                    <div className="w-full mt-4 flex-col gap-x-4">
+                                        <p className="text-gray-600">
+                                            Availbale series
+                                        </p>
+                                        <ul className="w-full ml-4 list-decimal text-gray-500">
+                                            {series.map((serie) => (
+                                                <li
+                                                    key={serie.name}
+                                                    className="text-sm"
+                                                >
+                                                    <p>{serie.name}</p>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                        <p className="text-indigo-600 mt-4">
+                                            Or i have skill issue
+                                        </p>
+                                    </div>
                                 </div>
                             )}
                             {results?.metadatas?.length &&
